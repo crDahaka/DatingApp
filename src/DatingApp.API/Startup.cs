@@ -22,6 +22,8 @@
                 opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
                 
             services.AddMvc();
+
+            services.AddCors();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -30,6 +32,12 @@
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            app.UseCors(x => x
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin()
+                .AllowCredentials());
 
             app.UseMvc();
         }
