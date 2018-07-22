@@ -8,7 +8,7 @@
     using Microsoft.EntityFrameworkCore;
 
     [Route("api/[controller]")]
-    public class ValuesController : Controller
+    public class ValuesController : ControllerBase
     {
         private readonly DataContext _context;
 
