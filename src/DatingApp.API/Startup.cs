@@ -23,8 +23,7 @@
         {
             services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
             
-            services.AddDbContext<DataContext>(opt => 
-                opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>(opt => opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
@@ -50,12 +49,7 @@
                 app.UseDeveloperExceptionPage();
             }
             
-            app.UseCors(x => x
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowAnyOrigin()
-                .AllowCredentials());
-
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             app.UseAuthentication();
             app.UseMvc();
         }
