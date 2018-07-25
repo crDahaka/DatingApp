@@ -23,11 +23,11 @@
               "src/assets"
             ],
             "styles": [
-              "../DatingAppSPA/node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "../DatingAppSPA/node_modules/font-awesome/css/font-awesome.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/alertifyjs/build/alertify.min.js"
+            ]
           },
           "configurations": {
             "production": {
