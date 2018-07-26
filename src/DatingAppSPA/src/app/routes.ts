@@ -3,16 +3,18 @@ import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { HomeComponent } from './home/home.component';
 import { Routes } from '@angular/router';
-import { MemberListComponent } from './member-list/member-list.component';
+import { MemberListComponent } from './members/member-list/member-list.component';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 
 export const appRoutes: Routes = [
-    { path: '' , component: HomeComponent },
+    { path: 'home' , component: HomeComponent },
     {
         path: '',
         runGuardsAndResolvers: 'always',
         canActivate: [AuthenticationGuard],
         children: [
             { path: 'members' , component: MemberListComponent, },
+            { path: 'members/:id' , component: MemberDetailComponent, },
             { path: 'messages' , component: MessagesComponent },
             { path: 'lists' , component: ListsComponent },
         ]

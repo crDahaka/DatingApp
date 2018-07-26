@@ -13,6 +13,7 @@ namespace DatingApp.API.Controllers
     using Microsoft.IdentityModel.Tokens;
 
     [Route("api/[controller]")]
+    [ApiController]
     public class AuthenticationController : ControllerBase
     {
         private readonly IAuthenticationRepository _repo;
