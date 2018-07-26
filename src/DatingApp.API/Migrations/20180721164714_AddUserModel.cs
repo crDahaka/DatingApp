@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
-
-namespace DatingApp.API.Migrations
+﻿namespace DatingApp.API.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+    using System;
+    using System.Collections.Generic;
+    
     public partial class AddUserModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

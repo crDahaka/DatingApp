@@ -2,6 +2,7 @@
 {
     using System.Net;
     using System.Text;
+    using AutoMapper;
     using DatingApp.API.Data;
     using DatingApp.API.Helpers;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -9,6 +10,7 @@
     using Microsoft.AspNetCore.Diagnostics;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -25,7 +27,10 @@
         
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper();
+            
             services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
+            services.AddScoped<IDatingRepository, DatingRepository>();
             
             services.AddDbContext<DataContext>(opt => opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -39,14 +44,18 @@
                         ValidateAudience = false
                     };
                 });
+
+            services.AddTransient<DatabaseSeeder>();
                 
-            services.AddMvc();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddJsonOptions(opt => {
+                    opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                });
 
             services.AddCors();
-            
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, DatabaseSeeder seeder)
         {
             if (env.IsDevelopment())
             {
@@ -67,6 +76,7 @@
                 });
             }
             
+            //seeder.SeedUsers();
             app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             app.UseAuthentication();
             app.UseMvc();
