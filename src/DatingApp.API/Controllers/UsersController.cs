@@ -41,9 +41,7 @@ namespace DatingApp.API.Controllers
         {
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) return Unauthorized();
 
-            var existingUser = await _repo.GetUser(id);
-            _mapper.Map(userDto, existingUser);
-
+            _mapper.Map(userDto, await _repo.GetUser(id));
             if (await _repo.SaveAll()) return NoContent();
 
             throw new Exception($"Updating user {id} failed on save!");

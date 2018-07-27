@@ -31,6 +31,8 @@
             
             services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
             services.AddScoped<IDatingRepository, DatingRepository>();
+
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             
             services.AddDbContext<DataContext>(opt => opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -76,7 +78,7 @@
                 });
             }
             
-            seeder.SeedUsers();
+            //seeder.SeedUsers();
             app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             app.UseAuthentication();
             app.UseMvc();
