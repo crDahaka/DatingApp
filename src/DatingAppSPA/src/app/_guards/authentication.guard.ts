@@ -1,4 +1,4 @@
-import { AuthenticationService } from './../_services/authentication.service';
+import { AuthenticationService } from '../_services/authentication.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { AlertifyService } from '../_services/alertify.service';
