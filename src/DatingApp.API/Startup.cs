@@ -32,6 +32,8 @@
             services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
             services.AddScoped<IDatingRepository, DatingRepository>();
 
+            services.AddScoped<LogUserActivity>();
+
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             
             services.AddDbContext<DataContext>(opt => opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
