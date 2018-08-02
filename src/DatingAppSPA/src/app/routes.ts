@@ -14,21 +14,21 @@ import { MemberDetailComponent } from './members/member-detail/member-detail.com
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 
 export const appRoutes: Routes = [
-    { path: 'home' , component: HomeComponent },
+    { path: '' , component: HomeComponent },
     {
         path: '',
         runGuardsAndResolvers: 'always',
         canActivate: [AuthenticationGuard],
         children: [
-            { path: 'members' , component: MemberListComponent, resolve: { users: MemberListResolver} },
-            { path: 'members/:id' , component: MemberDetailComponent, resolve: { user: MemberDetailResolver }},
+            { path: 'members', component: MemberListComponent, resolve: { users: MemberListResolver} },
+            { path: 'members/:id', component: MemberDetailComponent, resolve: { user: MemberDetailResolver }},
             { path: 'member/edit', component: MemberEditComponent,
                 resolve: { user: MemberEditResolver },
                 canDeactivate: [PreventUnsavedChanges]},
-            { path: 'messages' , component: MessagesComponent, resolve: { messages: MessagesResolver } },
-            { path: 'lists' , component: ListsComponent, resolve: { users: ListsResolver } },
+            { path: 'messages', component: MessagesComponent, resolve: { messages: MessagesResolver } },
+            { path: 'lists', component: ListsComponent, resolve: { users: ListsResolver } },
         ]
     },
-    { path: '**', redirectTo: 'home', pathMatch: 'full' }
+    { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
