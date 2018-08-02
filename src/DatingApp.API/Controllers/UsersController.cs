@@ -13,7 +13,6 @@ namespace DatingApp.API.Controllers
     using Microsoft.AspNetCore.Mvc;
 
     [ServiceFilter(typeof(LogUserActivity))]
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
